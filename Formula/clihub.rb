@@ -7,7 +7,7 @@ class Clihub < Formula
   sha256 "47db84e001aa61a1c8d88c42570184f322b1012bbb286be8f2ddd8602394bae5"
   license "MIT"
 
-  depends_on "python@3.13"
+  depends_on "python@3.14"
 
   def install
     virtualenv_install_with_resources
