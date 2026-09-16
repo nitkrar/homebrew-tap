@@ -21,6 +21,10 @@ class Clihub < Formula
     <<~EOS
       Only `clihub` is linked. For the short `ch` command and ~/.clihub/config.toml:
         clihub init
+
+      `clihub init` points ~/.local/bin/ch at this exact version's Cellar
+      directory, so after every upgrade re-run:
+        clihub init --force
     EOS
   end
 
