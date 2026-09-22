@@ -8,12 +8,45 @@ clihub init
 `brew` links both `ch` and `clihub`. `clihub init` writes
 `~/.clihub/config.toml` and installs shell completion.
 
-## Releasing a new clihub version
-
 ```sh
-curl -sL -o /tmp/clihub.tar.gz \
-  https://github.com/nitkrar/clihub/archive/refs/tags/vX.Y.Z.tar.gz
-shasum -a 256 /tmp/clihub.tar.gz
+brew install nitkrar/tap/repoglass
 ```
 
-Update `url` and `sha256` in `Formula/clihub.rb`, commit, push.
+`brew` links both `rpg` and `repoglass`. The first command that needs an
+index builds it, downloading the default model once.
+
+## Releasing a new version
+
+```sh
+curl -sL -o /tmp/src.tar.gz \
+  https://github.com/nitkrar/<formula>/archive/refs/tags/vX.Y.Z.tar.gz
+shasum -a 256 /tmp/src.tar.gz
+```
+
+Update `url` and `sha256` in `Formula/<formula>.rb`, commit, push.
+
+## repoglass resources
+
+The dependency pins are independent of repoglass's own version, so a
+release bump does not touch them. Regenerate only when the dependencies
+in `pyproject.toml` change:
+
+```sh
+brew update-python-resources Formula/repoglass.rb
+```
+
+That writes sdist pins for everything. Six resources must then be put
+back to wheels, because this tap has no bottle and building them from
+sdist would land on every machine that installs: `numpy`, `hf-xet`,
+`safetensors`, `tokenizers` and `tree-sitter-language-pack` otherwise
+compile, and `cloudpickle`'s sdist does not build at all. They carry
+one URL per platform; `WHEELS` in the formula lists them.
+
+`numpy`'s wheels are built per cpython version, so its four pins move
+with `depends_on "python@3.14"`. The rest are abi3 and do not.
+
+```sh
+brew audit --strict --formula nitkrar/tap/repoglass
+brew install --build-from-source nitkrar/tap/repoglass
+brew test nitkrar/tap/repoglass
+```
