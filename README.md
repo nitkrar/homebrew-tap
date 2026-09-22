@@ -32,8 +32,13 @@ release bump does not touch them. Regenerate only when the dependencies
 in `pyproject.toml` change:
 
 ```sh
+brew trust --formula nitkrar/tap/repoglass
 brew update-python-resources Formula/repoglass.rb
 ```
+
+`brew install` trusts a formula on its own, so this is a step for editing
+one, not for installing it. Without it `update-python-resources` and
+`audit` refuse to load the formula at all.
 
 That writes sdist pins for everything. Six resources must then be put
 back to wheels, because this tap has no bottle and building them from
