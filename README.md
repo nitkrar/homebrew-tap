@@ -17,13 +17,20 @@ index builds it, downloading the default model once.
 
 ## Releasing a new version
 
+`repoglass` updates itself: its `release` workflow pushes here after
+publishing to PyPI, rewriting `url` and `sha256` for the new tag. It
+authenticates with a `HOMEBREW_TAP_TOKEN` secret held in that
+repository.
+
+`clihub` is still bumped by hand:
+
 ```sh
 curl -sL -o /tmp/src.tar.gz \
-  https://github.com/nitkrar/<formula>/archive/refs/tags/vX.Y.Z.tar.gz
+  https://github.com/nitkrar/clihub/archive/refs/tags/vX.Y.Z.tar.gz
 shasum -a 256 /tmp/src.tar.gz
 ```
 
-Update `url` and `sha256` in `Formula/<formula>.rb`, commit, push.
+Update `url` and `sha256` in `Formula/clihub.rb`, commit, push.
 
 ## repoglass resources
 
