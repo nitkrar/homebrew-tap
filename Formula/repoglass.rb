@@ -3,8 +3,8 @@ class Repoglass < Formula
 
   desc "Local code and prose search with exact symbol lookup"
   homepage "https://github.com/nitkrar/repoglass"
-  url "https://github.com/nitkrar/repoglass/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "474858fee4b3d9c9a1e2167127b244b36489f342f59aa7510e59d96fbe3e41f5"
+  url "https://github.com/nitkrar/repoglass/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "ad866558f465707af08356b413bec665ef254b0636eca8e744a45cd15fe20324"
   license "MIT"
 
   depends_on "libyaml" # pyyaml links against it
