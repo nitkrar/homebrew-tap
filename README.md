@@ -18,9 +18,10 @@ index builds it, downloading the default model once.
 ## Releasing a new version
 
 `repoglass` updates itself: its `release` workflow pushes here after
-publishing to PyPI, rewriting `url` and `sha256` for the new tag. It
-authenticates with a `HOMEBREW_TAP_TOKEN` secret held in that
-repository.
+publishing, pointing `url` and `sha256` at the new sdist. PyPI files are
+immutable, where a GitHub archive is generated per request and has
+changed hash before. It authenticates with a `HOMEBREW_TAP_TOKEN`
+secret held in that repository.
 
 `clihub` is still bumped by hand:
 
