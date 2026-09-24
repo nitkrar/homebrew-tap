@@ -3,8 +3,8 @@ class Clihub < Formula
 
   desc "Personal umbrella CLI router"
   homepage "https://github.com/nitkrar/clihub"
-  url "https://files.pythonhosted.org/packages/fd/d8/aa34ea1a8f808d1e807be1b3c7648978cd0a97020df0599c60fe5fdf1d94/clihub_cli-1.0.3.tar.gz"
-  sha256 "137b72b20ff7a00fde43c2fdf487f0d538fc809244cc326c01deebd6bc00aebc"
+  url "https://files.pythonhosted.org/packages/70/76/d7a8893a7ed685f384012259177097f53a01ae158715a2b72d3d154343ae/clihub_cli-1.0.4.tar.gz"
+  sha256 "c9db4a4e919784e0f5558c863205227d3779ea920ec05957ef46c587ca65298a"
   license "MIT"
 
   depends_on "python@3.14"
