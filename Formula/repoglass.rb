@@ -212,6 +212,26 @@ class Repoglass < Formula
     end
   end
 
+  # Like numpy's, orjson's wheels are built per cpython version, so these
+  # pins track depends_on "python@3.14" too. The universal2 wheel serves
+  # both macOS architectures from macOS 10.15.
+  resource "orjson" do
+    on_macos do
+      url "https://files.pythonhosted.org/packages/12/9d/3931253e6f3148abf2cbe14830367042a4806b362ea520df2303db188fb9/orjson-3.12.0-cp314-cp314-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl", using: :nounzip
+      sha256 "9e6fee342a48760e854d743e7a81534d8e2925a6f46e09f750cf56b50fd1de5d"
+    end
+    on_linux do
+      on_arm do
+        url "https://files.pythonhosted.org/packages/ee/49/6e6142999ca01509219be5e5a9c338a3e5ea011f63e91ff473fbbf3734ed/orjson-3.12.0-cp314-cp314-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", using: :nounzip
+        sha256 "f06dd838d1e07d9b1de0932ec0485ec92c4d5f5d1ad4817a656268c3e88be1e1"
+      end
+      on_intel do
+        url "https://files.pythonhosted.org/packages/49/d0/3745af0a4cc9867784f29722929cec4d10bd1c877cd754b01ba6d96eb21a/orjson-3.12.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", using: :nounzip
+        sha256 "c6b11be792c3d2c6a4be2af4ebf97a68d0bf5f580aca6e86a418a354f6cc846a"
+      end
+    end
+  end
+
   resource "packaging" do
     url "https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz"
     sha256 "94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79"
@@ -225,6 +245,11 @@ class Repoglass < Formula
   resource "pyyaml" do
     url "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz"
     sha256 "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
+  end
+
+  resource "semsift" do
+    url "https://files.pythonhosted.org/packages/a2/5a/cb819e1d7fd8835dec2f3b26b998ff854599566015d9b6d275e8382ccddb/semsift-0.0.3.tar.gz"
+    sha256 "357545326d367f973a38be0e1ebf9cb10478b2d40501b0ccd69abd2c28dd8951"
   end
 
   resource "tqdm" do
@@ -242,11 +267,16 @@ class Repoglass < Formula
     sha256 "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5"
   end
 
+  resource "vicinity" do
+    url "https://files.pythonhosted.org/packages/f3/8f/3d1d6b600c6e07cfa61c1c7e2b7c0527416ae540483545ae7add96268143/vicinity-0.4.6.tar.gz"
+    sha256 "ce3e33dab3e6f3f028dcfb8414836d19f600f570d5c0cce720ead088a0343cad"
+  end
+
   # Resources carrying a compiled extension are installed from the wheels their
   # projects publish. Building them from sdist instead would pull in a Rust
   # toolchain for four of them, and brew has no bottle for this tap, so that
   # cost would land on every machine that installs rather than once here.
-  WHEELS = %w[cloudpickle hf-xet numpy safetensors tokenizers tree-sitter-language-pack].freeze
+  WHEELS = %w[cloudpickle hf-xet numpy orjson safetensors tokenizers tree-sitter-language-pack].freeze
 
   def install
     venv = virtualenv_create(libexec, "python3.14")
