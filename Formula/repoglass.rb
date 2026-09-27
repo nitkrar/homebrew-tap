@@ -292,6 +292,19 @@ class Repoglass < Formula
     venv.pip_install_and_link buildpath
   end
 
+  # Homebrew rewrites install names in the libraries wheels bundle (numpy
+  # ships OpenBLAS and the gfortran runtime) and leaves their signatures
+  # invalid; on Apple silicon the kernel then kills any process loading
+  # them. post_install runs after that rewriting, so an ad-hoc signature
+  # applied here holds.
+  def post_install
+    return unless OS.mac?
+
+    Dir[libexec/"lib/python*/site-packages/**/*.dylib"].each do |dylib|
+      system "codesign", "--force", "--sign", "-", dylib
+    end
+  end
+
   # Anything that reads an index is out of reach here: building one resolves
   # the embedding model, and that is a download this test should not make.
   test do
