@@ -213,12 +213,17 @@ class Repoglass < Formula
   end
 
   # Like numpy's, orjson's wheels are built per cpython version, so these
-  # pins track depends_on "python@3.14" too. The universal2 wheel serves
-  # both macOS architectures from macOS 10.15.
+  # pins track depends_on "python@3.14" too.
   resource "orjson" do
     on_macos do
-      url "https://files.pythonhosted.org/packages/12/9d/3931253e6f3148abf2cbe14830367042a4806b362ea520df2303db188fb9/orjson-3.12.0-cp314-cp314-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl", using: :nounzip
-      sha256 "9e6fee342a48760e854d743e7a81534d8e2925a6f46e09f750cf56b50fd1de5d"
+      on_arm do
+        url "https://files.pythonhosted.org/packages/8a/0e/b4a4f1e305367245877b967a0bad70fcf001d77c54ac4339a120b66fdae4/orjson-3.12.0-cp314-cp314-macosx_15_0_arm64.whl", using: :nounzip
+        sha256 "8c3bb86dd10f39b3fbf434b7d5dc7cac77d6fc8ac572ae30a10731ede2c4b647"
+      end
+      on_intel do
+        url "https://files.pythonhosted.org/packages/12/9d/3931253e6f3148abf2cbe14830367042a4806b362ea520df2303db188fb9/orjson-3.12.0-cp314-cp314-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl", using: :nounzip
+        sha256 "9e6fee342a48760e854d743e7a81534d8e2925a6f46e09f750cf56b50fd1de5d"
+      end
     end
     on_linux do
       on_arm do
