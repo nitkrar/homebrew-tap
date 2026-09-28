@@ -228,8 +228,8 @@ class Repoglass < Formula
   end
 
   resource "semsift" do
-    url "https://files.pythonhosted.org/packages/f2/e5/2866e1eb5711c9f47af73aaf9e9ed090a6313a1be70cc62f19b8f40a73c5/semsift-0.0.4.tar.gz"
-    sha256 "424df8351288ea3f7d6823aea1cff6d9d248695ded54d28a008272f8af16872c"
+    url "https://files.pythonhosted.org/packages/9a/44/17d05a15f919565212d60c83dbdb8e88d4bbf720f2c51fbaa0ca31eb3d28/semsift-0.0.5.tar.gz"
+    sha256 "0fb41c7bdd531bf40100ff2e8420bec024ac7539060e6f1b86285cf6b223fe3d"
   end
 
   resource "tqdm" do
