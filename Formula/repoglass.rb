@@ -212,31 +212,6 @@ class Repoglass < Formula
     end
   end
 
-  # Like numpy's, orjson's wheels are built per cpython version, so these
-  # pins track depends_on "python@3.14" too.
-  resource "orjson" do
-    on_macos do
-      on_arm do
-        url "https://files.pythonhosted.org/packages/8a/0e/b4a4f1e305367245877b967a0bad70fcf001d77c54ac4339a120b66fdae4/orjson-3.12.0-cp314-cp314-macosx_15_0_arm64.whl", using: :nounzip
-        sha256 "8c3bb86dd10f39b3fbf434b7d5dc7cac77d6fc8ac572ae30a10731ede2c4b647"
-      end
-      on_intel do
-        url "https://files.pythonhosted.org/packages/12/9d/3931253e6f3148abf2cbe14830367042a4806b362ea520df2303db188fb9/orjson-3.12.0-cp314-cp314-macosx_10_15_x86_64.macosx_11_0_arm64.macosx_10_15_universal2.whl", using: :nounzip
-        sha256 "9e6fee342a48760e854d743e7a81534d8e2925a6f46e09f750cf56b50fd1de5d"
-      end
-    end
-    on_linux do
-      on_arm do
-        url "https://files.pythonhosted.org/packages/ee/49/6e6142999ca01509219be5e5a9c338a3e5ea011f63e91ff473fbbf3734ed/orjson-3.12.0-cp314-cp314-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", using: :nounzip
-        sha256 "f06dd838d1e07d9b1de0932ec0485ec92c4d5f5d1ad4817a656268c3e88be1e1"
-      end
-      on_intel do
-        url "https://files.pythonhosted.org/packages/49/d0/3745af0a4cc9867784f29722929cec4d10bd1c877cd754b01ba6d96eb21a/orjson-3.12.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", using: :nounzip
-        sha256 "c6b11be792c3d2c6a4be2af4ebf97a68d0bf5f580aca6e86a418a354f6cc846a"
-      end
-    end
-  end
-
   resource "packaging" do
     url "https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz"
     sha256 "94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79"
@@ -253,8 +228,8 @@ class Repoglass < Formula
   end
 
   resource "semsift" do
-    url "https://files.pythonhosted.org/packages/a2/5a/cb819e1d7fd8835dec2f3b26b998ff854599566015d9b6d275e8382ccddb/semsift-0.0.3.tar.gz"
-    sha256 "357545326d367f973a38be0e1ebf9cb10478b2d40501b0ccd69abd2c28dd8951"
+    url "https://files.pythonhosted.org/packages/f2/e5/2866e1eb5711c9f47af73aaf9e9ed090a6313a1be70cc62f19b8f40a73c5/semsift-0.0.4.tar.gz"
+    sha256 "424df8351288ea3f7d6823aea1cff6d9d248695ded54d28a008272f8af16872c"
   end
 
   resource "tqdm" do
@@ -272,16 +247,11 @@ class Repoglass < Formula
     sha256 "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5"
   end
 
-  resource "vicinity" do
-    url "https://files.pythonhosted.org/packages/f3/8f/3d1d6b600c6e07cfa61c1c7e2b7c0527416ae540483545ae7add96268143/vicinity-0.4.6.tar.gz"
-    sha256 "ce3e33dab3e6f3f028dcfb8414836d19f600f570d5c0cce720ead088a0343cad"
-  end
-
   # Resources carrying a compiled extension are installed from the wheels their
   # projects publish. Building them from sdist instead would pull in a Rust
   # toolchain for four of them, and brew has no bottle for this tap, so that
   # cost would land on every machine that installs rather than once here.
-  WHEELS = %w[cloudpickle hf-xet numpy orjson safetensors tokenizers tree-sitter-language-pack].freeze
+  WHEELS = %w[cloudpickle hf-xet numpy safetensors tokenizers tree-sitter-language-pack].freeze
 
   def install
     venv = virtualenv_create(libexec, "python3.14")
@@ -297,18 +267,6 @@ class Repoglass < Formula
     venv.pip_install_and_link buildpath
   end
 
-  # Homebrew rewrites install names in the libraries wheels bundle (numpy
-  # ships OpenBLAS and the gfortran runtime) and leaves their signatures
-  # invalid; on Apple silicon the kernel then kills any process loading
-  # them. post_install runs after that rewriting, so an ad-hoc signature
-  # applied here holds.
-  def post_install
-    return unless OS.mac?
-
-    Dir[libexec/"lib/python*/site-packages/**/*.dylib"].each do |dylib|
-      system "codesign", "--force", "--sign", "-", dylib
-    end
-  end
 
   # Anything that reads an index is out of reach here: building one resolves
   # the embedding model, and that is a download this test should not make.
