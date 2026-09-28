@@ -3,8 +3,8 @@ class Repoglass < Formula
 
   desc "Local code and prose search with exact symbol lookup"
   homepage "https://github.com/nitkrar/repoglass"
-  url "https://files.pythonhosted.org/packages/e0/29/1fde8ddf510c2c23bbb04fa647a174a7834e8b04f761614c4ec4c943ffda/repoglass-0.3.0.tar.gz"
-  sha256 "ccfb58d2328d5d0d79fa4f161cb28d32652f3090a5485a242babf4ac8fac9c0f"
+  url "https://files.pythonhosted.org/packages/e6/0e/5103f375df344da32ff6f001fdb340f13d99bfb933f2b48d330f00f7ed38/repoglass-0.3.1.tar.gz"
+  sha256 "428784f3d2d20e418c3376a298de2832d4b0584e8de464548b68d1a9fd079930"
   license "MIT"
 
   depends_on "libyaml" # pyyaml links against it
