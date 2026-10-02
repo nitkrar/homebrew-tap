@@ -1,28 +1,28 @@
 class RepoglassRs < Formula
   desc "Local code and prose search with a symbol table, in Rust"
   homepage "https://github.com/nitkrar/repoglass-rs"
-  version "0.1.0"
+  version "0.1.2"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.0/repoglass-rs-v0.1.0-aarch64-apple-darwin.tar.gz"
-      sha256 "b9625fffc7ea5d3cdbc395075d98127aeccbfeb98497b975b67ded8a6baeaa0c"
+      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.2/repoglass-rs-v0.1.2-aarch64-apple-darwin.tar.gz"
+      sha256 "e255ac10b7a2a8d3447a11e4aa8776c1d4fb7020eb7d0b5cf204afe6f6212fac"
     end
     on_intel do
-      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.0/repoglass-rs-v0.1.0-x86_64-apple-darwin.tar.gz"
-      sha256 "39ca0a2bc5c3cf325ac5335b6d92d459b4ceab52a75b9cd149d94e340a1ef96b"
+      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.2/repoglass-rs-v0.1.2-x86_64-apple-darwin.tar.gz"
+      sha256 "f0215e6ab6b763d268e5ded4d60132582a58f7f08ceb03eeb3aa9ea9bf569b9a"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.0/repoglass-rs-v0.1.0-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "59ef94d74a80f913c7255bff37599374029218133317eef0028b405a81fd7584"
+      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.2/repoglass-rs-v0.1.2-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "d23f9027f3d0422bf24908ae0fa089e0a04051b50b8e83a25ff5db90edc5092e"
     end
     on_intel do
-      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.0/repoglass-rs-v0.1.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "8ed2150ecc6a2b03297c1e695c123f0b2bf52aecbdc26b44c27754d035a8a4a2"
+      url "https://github.com/nitkrar/repoglass-rs/releases/download/v0.1.2/repoglass-rs-v0.1.2-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "8c9d306dcba4db48eab332aa625940db78495337b452a91d55fb916027b009db"
     end
   end
 
